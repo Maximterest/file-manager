@@ -1,0 +1,13 @@
+{
+    "raw_folder": "RAW",
+    "photo_extensions": [
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".heic"
+    ],
+    "raw_extensions": [
+        ".raf",
+        ".raw"
+    ]
+}

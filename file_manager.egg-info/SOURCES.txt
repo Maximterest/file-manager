@@ -1,0 +1,12 @@
+pyproject.toml
+file_manager/__init__.py
+file_manager/cli.py
+file_manager/config.py
+file_manager/organizer.py
+file_manager/utils.py
+file_manager.egg-info/PKG-INFO
+file_manager.egg-info/SOURCES.txt
+file_manager.egg-info/dependency_links.txt
+file_manager.egg-info/entry_points.txt
+file_manager.egg-info/requires.txt
+file_manager.egg-info/top_level.txt

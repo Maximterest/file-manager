@@ -1,0 +1,199 @@
+# file-manager
+
+A CLI and GUI tool for photo organisation and Windows folder management.
+
+Built for photographers who want a fast, repeatable workflow:
+sort imports by date, rename files consistently, clean up orphaned RAWs,
+and color-code folders in Windows Explorer.
+
+---
+
+## Features
+
+| Feature | Description |
+|---|---|
+| **Organize** | Move photos into `YYMMDD/` sub-folders using EXIF metadata |
+| **Rename** | Rename to `<Camera>_<YYMMDD>_<NNN>.<ext>` consistently |
+| **Clean** | Delete orphaned RAW files, then rename everything |
+| **Color** | Set a custom icon color in Windows Explorer (Windows only) |
+| **GUI** | Full graphical interface — no terminal needed |
+
+---
+
+## Installation
+
+```bash
+pip install file-manager-maximterest
+pip install tkinterdnd2
+```
+
+> **Requirements:** Python 3.10+.  
+> The folder-color feature is Windows-only. All other commands work on macOS and Linux.
+
+---
+
+## Quick start
+
+```bash
+# Organize a fresh import by date
+fm photo_organize "../PHOTOS"
+
+# Rename photos in a folder
+fm photo_rename "../PHOTOS/260418"
+
+# Delete orphaned RAWs, then rename
+fm photo_clean "../PHOTOS/260418"
+
+# Color a folder (Windows)
+fm color "../PHOTOS/260418" green
+
+# Open the GUI
+fm gui
+```
+
+---
+
+## CLI reference
+
+```
+fm <command> [options]
+```
+
+Run `fm --help` to list commands, or `fm <command> --help` for details.
+
+### `photo_organize` · alias `porga`
+
+Move photos and RAW files into sub-folders named by their EXIF shoot date (`YYMMDD`).
+
+```
+fm photo_organize <path>
+fm porga <path>
+```
+
+- RAW files go into a nested `RAW/` sub-folder (name configurable in `settings.json`, and can be null).
+- Files without EXIF data are skipped and reported.
+- Duplicate file names in the destination are skipped.
+
+### `photo_rename` · alias `prename`
+
+Rename all photos in a folder to `<CameraModel>_<YYMMDD>_<NNN>.<ext>`.
+
+```
+fm photo_rename <path>
+fm prename <path>
+```
+
+- Matching RAW files are renamed in sync.
+- Padding (`NNN`) is zero-padded and based on sort order.
+
+### `photo_clean` · alias `pclean`
+
+Two-step cleanup for a date folder:
+
+1. Delete any RAW file that has no matching photo.
+2. Rename all remaining photos (`photo_rename`).
+
+```
+fm photo_clean <path>
+fm pclean <path>
+```
+
+> ⚠ Deletion is permanent. Double-check your path.
+
+### `color`
+
+Set the icon color of a folder in Windows Explorer.
+
+```
+fm color <path> [COLOR] [--subfolders]
+```
+
+| Option | Description |
+|---|---|
+| `COLOR` | One of the colors listed below (default: `red`) |
+| `-sub`, `--subfolders` | Apply the color to every direct sub-folder |
+
+Available colors:  
+`blue` · `space` · `navy` · `race_blue` · `teal` · `light_blue` · `green` · `olive` · `lime` · `mint` · `red` · `orange` · `pink` · `purple` · `maroon` · `coffee` · `yellow` · `white` · `gray` · `dark_gray`
+
+> Windows only — no-op on other platforms.
+
+### `gui`
+
+Open the graphical user interface.
+
+```
+fm gui
+```
+
+---
+
+## GUI
+
+The GUI mirrors all CLI commands with folder pickers, a color selector,
+and a live output log.
+
+- **Photos tab** — pick a folder and click Organize, Rename, or Clean.
+- **Color tab** — pick a folder, choose a color, apply.
+- **Settings tab** — edit `settings.json` inline and save without restarting.
+
+---
+
+## Configuration
+
+Edit `settings.json` inside the package (or via the Settings tab in the GUI):
+
+```json
+{
+    "raw_folder": "RAW",
+    "photo_extensions": [
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".heic"
+    ],
+    "raw_extensions": [
+        ".raf",
+        ".raw"
+    ]
+}
+```
+
+| Key | Description |
+|---|---|
+| `raw_folder` | Sub-folder name for RAW files |
+| `photo_extensions` | File extensions treated as photos |
+| `raw_extensions` | File extensions treated as RAW files |
+
+---
+
+## Publishing to PyPI (for maintainers)
+
+```bash
+pip install build twine
+
+# Build
+python -m build
+
+# Upload to PyPI
+twine upload dist/*
+```
+
+---
+
+## Contributing
+
+1. Fork the repo and create a feature branch.
+2. Keep changes focused — one feature per PR.
+3. Run a quick smoke-test before opening a PR:
+   ```bash
+   pip install -e .
+   fm --help
+   fm photo_organize /path/to/test/photos
+   ```
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE).
