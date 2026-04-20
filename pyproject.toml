@@ -1,15 +1,19 @@
 [build-system]
 requires = ["setuptools>=68", "wheel"]
-build-backend = "setuptools.backends.legacy:build"
+build-backend = "setuptools.build_meta"
 
 [project]
-name = "file-manager"
-version = "0.2.0"
+name = "file-manager-maximterest"
+version = "0.2.1"
 description = "CLI and GUI tool for photo organisation and folder management"
 readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "Maximterest" }]
 requires-python = ">=3.10"
+dependencies = [
+    "Pillow>=10.0",
+    "tkinterdnd2>=0.3"
+]
 keywords = ["photos", "exif", "organizer", "file-management", "cli", "gui"]
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -19,7 +23,7 @@ classifiers = [
     "Topic :: Utilities",
 ]
 [project.optional-dependencies]
-dnd = ["tkinterdnd2>=0.3"]   # enables drag-and-drop in the GUI
+gui = ["tkinterdnd2>=0.3"]   # enables drag-and-drop in the GUI
 
 [project.scripts]
 file-manager = "file_manager.cli:main"
@@ -34,4 +38,4 @@ where = ["."]
 include = ["file_manager*"]
 
 [tool.setuptools.package-data]
-file_manager = ["icons/*.ico", "settings.json"]\
+file_manager = ["icons/*.ico", "settings.json"]

@@ -1,3 +1,24 @@
+Metadata-Version: 2.4
+Name: file-manager-maximterest
+Version: 0.2.0
+Summary: CLI and GUI tool for photo organisation and folder management
+Author: Maximterest
+License: MIT
+Project-URL: Homepage, https://github.com/Maximterest/file-manager
+Project-URL: Bug Tracker, https://github.com/Maximterest/file-manager/issues
+Keywords: photos,exif,organizer,file-management,cli,gui
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Multimedia :: Graphics
+Classifier: Topic :: Utilities
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Provides-Extra: dnd
+Requires-Dist: tkinterdnd2>=0.3; extra == "dnd"
+Dynamic: license-file
+
 # file-manager
 
 A CLI and GUI tool for photo organisation and Windows folder management.
@@ -24,6 +45,7 @@ and color-code folders in Windows Explorer.
 
 ```bash
 pip install file-manager-maximterest
+pip install tkinterdnd2
 ```
 
 > **Requirements:** Python 3.10+.  
