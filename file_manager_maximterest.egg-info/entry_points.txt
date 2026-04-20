@@ -1,3 +1,0 @@
-[console_scripts]
-file-manager = file_manager.cli:main
-fm = file_manager.cli:main
